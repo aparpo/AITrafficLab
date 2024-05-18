@@ -7,10 +7,12 @@ import sumolib
 import time
 import matplotlib.pyplot as plt
 import subprocess
+from tqdm import tqdm
+
 
 from agents import *
 from generators import *
-from schedule import GraphOrderedActivation
+from schedule import GraphOrderedScheduler
 import error_codes as err
 
 # def import_data_from(place:str, output_path:str):
@@ -25,75 +27,84 @@ import error_codes as err
 
 
 class Ecosystem(mesa.Model):
-    def __init__(self,graph_file, connection, node_generator=None, edge_generator=None, vehicle_generator=None, iters=None, gui = False):
+    def __init__(self,graph_file, connection, node_generator=None, edge_generator=None, vehicle_generator=None, iters=None, gui = False, graph=None):
         super().__init__()
+        self.graph_file = graph_file
         self.connection = connection
+        self.gui = gui
         self.iters = iters
-        if iters<=0 or iters is None:
-            self.start = self._start_eternal
+        if  iters is None or iters<=0:
+            self.start_strategy = self._start_eternal
         else:
-            self.start = self._start_iters
-        # sumoCmd = ["sumo-gui", "-n", graph_file+".net.xml", "--error-log", "error.log", "--message-log", "msg.log"]
-        # traci.start(sumoCmd)
-        self.connection.start(graph_file, gui)
-        # self.deltaT = traci.simulation.getDeltaT()
-        self.deltaT = self.connection.get_step_time()
-        print("DeltaT: {}".format(self.deltaT))
-
-        graph = nx.DiGraph(ox.graph_from_xml(graph_file+'.osm.xml'))
-        # pos = nx.spring_layout(self.graph)
-        # nx.draw_networkx_nodes(self.graph, pos)
-        # nx.draw_networkx_edges(self.graph, pos, arrows=True)
-        # plt.show()
-
-        # print(self.graph.edges(data=True))
-        # print(self.graph.nodes(data=True))
+            self.start_strategy = self._start_iters
+        # self.connection.start(graph_file, gui)
+        # self.deltaT = self.connection.get_step_time()
+        if graph:
+            self.graph = graph
+        else:
+            self.graph = nx.DiGraph(ox.graph_from_xml(graph_file+'.osm.xml'))
         
-        # self.sumonet = sumolib.net.readNet(graph_file+'.net.xml')
-        # self.sumo_to_nx = {edge._id: (int(edge._from._id), int(edge._to._id)) for edge in self.sumonet.getEdges()}
-        # self.nx_to_sumo = {(int(edge._from._id), int(edge._to._id)): edge._id for edge in self.sumonet.getEdges()}
-        # self.graph.remove_edges_from(list(set(self.graph.edges)-set(self.nx_to_sumo.keys()))) # Asegurar que ambas topologías coinciden
-        self.graph, self.sumo_to_nx, self.nx_to_sumo = self.connection.load_information(graph_file, graph)
-        self.line_graph = nx.line_graph(self.graph)
+        # self.graph, self.sumo_to_nx, self.nx_to_sumo = self.connection.load_information(graph_file, self.graph)
+        # self.line_graph = nx.line_graph(self.graph)
 
         
         if not node_generator:
             node_generator = Node_generator(self.connection)
+        self.node_generator = node_generator
         if not edge_generator:
             edge_generator = Edge_generator(self.connection)
+        self.edge_generator = edge_generator
         if not vehicle_generator:
             vehicle_generator = Dumb_vehicle_generator(self.connection)
+        self.vehicle_generator = vehicle_generator
 
-        self.grid = mesa.space.NetworkGrid(self.line_graph)
-        self.schedule = GraphOrderedActivation(self, node_generator.get_classes(), edge_generator.get_classes())
+        # self.grid = mesa.space.NetworkGrid(self.line_graph)
+        # self.schedule = GraphOrderedActivation(self, node_generator.get_classes(), edge_generator.get_classes())
 
         self.junctions = dict()
-        for node in node_generator.create_nodes(self):
-            self.junctions[node.id]=node
-            self.add_agent(node, place=False)
-
         self.roads = dict()
-        for edge in edge_generator.create_edges(self):
-            self.roads[edge.id]=edge
-            self.add_agent(edge, place=False)
-        self.road_statistics = {stat:dict() for stat in edge_generator.observables}
-
-        print("nx-to-sumo", self.nx_to_sumo)
-        print("roads", self.roads)
-
-        self.vehicle_generator = vehicle_generator
-        self.vehicle_statistics = {stat:dict() for stat in self.vehicle_generator.observables}
-        # print(self.statistics)
-
-        vehicle = vehicle_generator.generate_vehicle(self)
-        self.add_agent(vehicle, vehicle.road.id)
-        for vehicle in self.vehicle_generator.generate_vehicles(self, 10):
-            self.add_agent(vehicle, vehicle.road.id)
+        
+        self.reset()
 
         self.to_destroy = []
+
+        self._initialize()
+        
     
+    def _initialize(self):
+        self.connection.start(self.graph_file, False)
+        
+        self.deltaT = self.connection.get_step_time()            
+        self.graph, self.sumo_to_nx, self.nx_to_sumo = self.connection.load_information(self.graph_file, self.graph)
+        self.line_graph = nx.line_graph(self.graph)
+
+        self.grid = mesa.space.NetworkGrid(self.line_graph)
+        self.schedule = GraphOrderedScheduler(self, self.node_generator.get_classes(), self.edge_generator.get_classes())
+
+        for node in self.node_generator.create_nodes(self):
+            self.junctions[node.id]=node
+            self.add_agent(node, place=False)
+        
+        for edge in self.edge_generator.create_edges(self):
+            self.roads[edge.id]=edge
+            self.add_agent(edge, place=False)
+        
+        self.connection.close()
+
+    def start(self):
+        self.connection.start(self.graph_file, self.gui)
+        vehicle = self.vehicle_generator.generate_vehicle(self)
+        self.add_agent(vehicle, vehicle.road.id)
+        for vehicle in self.vehicle_generator.initial_generation(self):
+            self.add_agent(vehicle, vehicle.road.id)
+        self.start_strategy()
+    
+    def reset(self):
+        self.road_statistics = {stat:dict() for stat in self.edge_generator.observables}
+        self.vehicle_statistics = {stat:dict() for stat in self.vehicle_generator.observables}
+
     def step(self):
-        print("Siguiente iteración")
+        # print("Siguiente iteración")
         # Generadores de vehiculos
         for vehicle in self.vehicle_generator.generate_vehicles(self, 10):
             self.add_agent(vehicle, vehicle.road.id)
@@ -103,7 +114,6 @@ class Ecosystem(mesa.Model):
         self._purge()
     
     def _start_eternal(self):
-        # while traci.simulation.getMinExpectedNumber() > 0:
         while self.connection.is_simulation_running():
             self.step()
         self._destroy()
@@ -111,7 +121,7 @@ class Ecosystem(mesa.Model):
     
     def _start_iters(self):
         try:
-            for _ in range(self.iters):
+            for _ in tqdm(range(self.iters), desc = "Current simulation progress"):
                 self.step()
         except Exception as e:
             self.connection.manage_exception(e, self)
@@ -129,14 +139,15 @@ class Ecosystem(mesa.Model):
                 pass
     
     def _destroy(self):
-        for agent in self.schedule.agents:
+        vehicles = [
+            vehicle for vehicle in self.schedule.agents if
+                any(isinstance(vehicle, _class) for _class in self.vehicle_generator.get_classes())
+        ]
+        for agent in [vehicle for vehicle in vehicles]:
             self.to_destroy.append(agent)
         self._purge()
     
     def add_agent(self, agent, place=None):
-        # print([self.model.nx_to_sumo[self.origin.id], self.model.nx_to_sumo[self.destination.id]])
-        # traci.route.add("trip"+self.id, [self.model.nx_to_sumo[self.origin.id], self.model.nx_to_sumo[self.destination.id]])
-        # traci.vehicle.add(self.id, "trip"+self.id)
         if isinstance(agent, Vehicle_agent):
             self.connection.add_vehicle(agent.id, self.nx_to_sumo[agent.origin.id], self.nx_to_sumo[agent.destination.id])
         self.schedule.add(agent)

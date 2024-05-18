@@ -12,7 +12,7 @@ import ootraci
 class Simulator_connection(ABC):
     def __init__(self, vehicle_info, road_info, junction_info):
         self.vehicle_info = vehicle_info
-        self. road_info = road_info
+        self.road_info = road_info
         self.junction_info = junction_info
 
     @abstractmethod
@@ -46,7 +46,7 @@ class Simulator_connection(ABC):
     def is_simulation_running(self) -> bool:
         return True
 
-    def manage_exception(self, ex:Exception, context) -> int:
+    def manage_exception(self, ex:Exception, context):
         raise ex
 
 class Sumo_connection(Simulator_connection):
@@ -54,7 +54,8 @@ class Sumo_connection(Simulator_connection):
     def __init__(self):
         vehicle_info = ootraci.Vehicle_info()
         road_info = ootraci.Road_info()
-        super().__init__(vehicle_info, road_info, None)
+        junction_info = ootraci.Junction_info()
+        super().__init__(vehicle_info, road_info, junction_info)
         self.exception_strategy = {
             "fatal" : err.ABORTED,
             164: err.NON_EXISTING,
@@ -91,9 +92,7 @@ class Sumo_connection(Simulator_connection):
         except traci.exceptions.FatalTraCIError:
             return self.exception_strategy["fatal"], ex
         except traci.exceptions.TraCIException:
-            return self.exception_strategy[ex.getCommand()], ex
-        except Exception as e:
-            pass
+            return self.exception_strategy[ex.getCommand()], ex  
     
     def add_vehicle(self, id, origin, destination, **kwargs) -> bool:
         # print([self.model.nx_to_sumo[self.origin.id], self.model.nx_to_sumo[self.destination.id]])

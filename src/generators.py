@@ -2,6 +2,7 @@ from agents import *
 from abc import ABC, abstractmethod
 import random
 import traci
+import numpy as np
 
 class Node_generator():
     def __init__(self, connection, node_class = Junction_agent):
@@ -54,28 +55,42 @@ class Vehicle_generator(ABC):
     def generate_vehicles(self, model):
         pass
 
+    @abstractmethod
+    def initial_generation(self, model):
+        pass
+
     def get_classes(self):
         return [self.vehicle_class]
 
 class Dumb_vehicle_generator(Vehicle_generator):
     def generate_vehicle(self,model):
         try:
-            return self.vehicle_class(model, model.roads[1,6], model.roads[0,1], observables=self.observables) 
+            if random.random() < 0.9:
+                return self.vehicle_class(model, model.roads[4, 1], model.roads[0, 5], observables=self.observables) 
+            else:
+                return self.vehicle_class(model, model.roads[6, 2], model.roads[0, 5], observables=self.observables) 
         except TypeError as te:
             print(te)
             raise(TypeError("vehicle_class constructor not compatible with agents.Vehicle_agent constructor, consider adapting your vehicle_class or creating your own custom Vehicle_generator and overriding this method"))
 
     def generate_vehicles(self, model, *args):
-        return [self.generate_vehicle(model) for _ in range(1)]
+        # if self.a:
+            return [self.generate_vehicle(model) for _ in range(2)]
+        # else:
+        #     return []
     
     def get_vehicle_number(self, max):
         return 5
+    
+    def initial_generation(self, model):
+        return self.generate_vehicles(model)
 
 class Random_vehicle_generator(Vehicle_generator):
-    def __init__(self, connection, prob, max_car, observables={}, vehicle_class=Vehicle_agent):
+    def __init__(self, connection, prob, max_init_car, max_iter_car, observables={}, vehicle_class=Vehicle_agent):
         super().__init__(connection, observables, vehicle_class)
         self.prob = prob
-        self.max_car = max_car
+        self.max_init_car = max_init_car
+        self.max_iter_car = max_iter_car
 
     def generate_vehicle(self, model):
         valid_route = False
@@ -92,13 +107,15 @@ class Random_vehicle_generator(Vehicle_generator):
     
     def generate_vehicles(self, model, max = None):
         vehicles = []
-        for _ in range(self.get_vehicle_number(max)):
+        for _ in range(self.get_vehicle_number()):
             vehicles.append(self.generate_vehicle(model))
         return vehicles
     
-    def get_vehicle_number(self, max):
-        number = 0
-        for _ in range(self.max_car):
-            if self.prob > random.random(): 
-                number+=1
-        return number
+    def get_vehicle_number(self):
+        return np.random.poisson(lam=self.max_iter_car)
+    
+    def initial_generation(self, model):
+        vehicles = []
+        for _ in range(self.max_init_car):
+            vehicles.append(self.generate_vehicle(model))
+        return vehicles 

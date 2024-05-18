@@ -7,6 +7,7 @@ class Junction_agent(mesa.Agent):
     def __init__(self, model, id, properties:list, **kwargs):
         super().__init__(id, model)
         self.id = id
+        self.info = self.model.connection.junction_info
 
         for property in properties:
             try:
@@ -14,20 +15,23 @@ class Junction_agent(mesa.Agent):
             except KeyError: # Property not found in network node
                 self.set_property(property, None)
         
+        if not self.x or not self.y:
+            self.x, self.y = self.info.get_pos(self)
+        
         for kwarg in kwargs:
             # self.__dict__[kwarg] = kwargs[kwarg]
             # self.model.graph.nodes[id][property] = kwargs[kwarg] 
             self.set_property(kwarg, kwargs[kwarg])
-    
+
+    def set_property(self,property, value):
+        self.__dict__[property] = value
+        self.model.graph.nodes[self.id][property] = value # Create it in graph
+        
     def step(self):
         self.step_behaviour()
     
     def step_behaviour(self):
         pass
-    
-    def set_property(self,property, value):
-        self.__dict__[property] = value
-        self.model.graph.nodes[self.id][property] = value # Create it in graph
     
     def on_destroy(self):
         pass
@@ -50,19 +54,21 @@ class Road_agent(mesa.Agent):
 
         if "max_speed" not in kwargs:
             kwargs["max_speed"] = self.info.get_max_speed(self)
+
+        if "lanes" not in kwargs:
+            kwargs["lanes"] = self.info.get_lane_number(self)
+            
         try:
             kwargs["time"] = self.length/kwargs["max_speed"]
-        except AttributeError:
+        except (AttributeError, TypeError):
             kwargs["length"] = self.info.get_length(self)
             kwargs["time"] = kwargs["length"]/kwargs["max_speed"]
         
         for kwarg in kwargs:
-            self.set_property(kwarg, kwargs[kwarg])
-    
+            self.set_property(kwarg, kwargs[kwarg]) 
     def set_property(self,property, value):
         self.__dict__[property] = value
-        self.model.graph.edges[self.id][property] = value # Create it in graph
-    
+        self.model.graph.edges[self.id][property] = value # Create it in graph   
     def get_leader(self, agent):
         agents = self.model.grid.get_cell_list_contents([self.id])
         leader = agents.index(agent)-1
@@ -76,8 +82,7 @@ class Road_agent(mesa.Agent):
         if follower >= len(agents):
             return self.src_node
         return agents[follower]
-
-    def get_pos(self, pos, default_first=True):
+    def get_agent_by_pos(self, pos, default_first=True):
         agents = self.model.grid.get_cell_list_contents([self.id])
         if len(agents) > 0:
             return agents[pos]
@@ -87,19 +92,18 @@ class Road_agent(mesa.Agent):
             return self.src_node
     
     def get_first(self):
-        self.get_pos(0)
-    
+        return self.get_agent_by_pos(0) 
+
     def get_last(self):
-        self.get_pos(-1, default_first=False)
-    
+        return self.get_agent_by_pos(-1, default_first=False) 
+        
     def step(self):
         self.step_behaviour()
         for obs in self.observables:
             try:
                 self.model.road_statistics[obs][self.id].append(self.observables[obs](self))
             except KeyError: # First time logging 
-                self.model.road_statistics[obs][self.id] = [self.observables[obs](self)]
-    
+                self.model.road_statistics[obs][self.id] = [self.observables[obs](self)] 
     def step_behaviour(self):
         pass
 
@@ -114,7 +118,7 @@ class Road_agent(mesa.Agent):
 class Vehicle_agent(mesa.Agent):
     next_id = 0
 
-    def __init__(self, model, origin, destination,  type="Car", id = None, observables = {}):
+    def __init__(self, model, origin:Road_agent, destination:Road_agent,  type="Car", id = None, observables = {}):
         if id:
             new_id = id
         else:
@@ -128,33 +132,19 @@ class Vehicle_agent(mesa.Agent):
         self.type = type
         self.observables = observables
         self.info = self.model.connection.vehicle_info
-
-        #self.model.add_agent(self)
-
     @classmethod
     def _get_new_id(cls, type):
-        id = str(type)+str(Vehicle_agent.next_id)
-        Vehicle_agent.next_id+=1
-        return id
-    
+        id = str(type)+str(cls.next_id)
+        cls.next_id+=1
+        return id  
     def move(self, road_id):
         self.model.grid.move_agent(self, road_id)
         self.road = self.model.roads[road_id]
-    
     def check_road_change(self, sumo_road_id):
         if self.road != self.model.sumo_to_nx[sumo_road_id]:
-            self.move(self.model.sumo_to_nx[sumo_road_id])
-            # print("Me movi a")
-            # print(self.road)
-        
-    
+            self.move(self.model.sumo_to_nx[sumo_road_id])         
     def step(self):
-        # print("Soy el agente {}".format(self.id))
-        # print(" Puedo ir a ")
-        # print(self.model.grid.get_neighborhood(self.node))
-
         try:
-            # print(self.get_road(), self.model.sumo_to_nx[self.get_road()])
             self.check_road_change(self.info.get_road(self))
             self.step_behaviour()
 

@@ -5,35 +5,30 @@ class Vehicle_info():
 
     def __init__(self):
         self.return_agent = {True: self._return_agent, False: self._return_id}
-
     def get_road(self, agent):
         return traci.vehicle.getRoadID(agent.id)
-
-    def get_acceleration(self, agent):
+    def get_acceleration(self, agent)->float:
         try:
             return traci.vehicle.getAcceleration(agent.id)
         except AttributeError:
-            return traci.vehicle.getAcceleration(agent)
-    
-    def get_co2_emission(self, agent, deltaT = 1):
+            return traci.vehicle.getAcceleration(agent) 
+    def get_co2_emission(self, agent, deltaT = 1)->float:
         try:
             return traci.vehicle.getCO2Emission(agent.id)*agent.model.deltaT
         except AttributeError:
-            return traci.vehicle.getCO2Emission(agent)*deltaT
-    
-    def get_co_emission(self, agent, deltaT = 1):
+            return traci.vehicle.getCO2Emission(agent)*deltaT  
+    def get_co_emission(self, agent, deltaT = 1)->float:
         try:
             return traci.vehicle.getCOEmission(agent.id)*agent.model.deltaT
         except AttributeError:
-            return traci.vehicle.getCOEmission(agent)*deltaT
-    
-    def get_accumulated_distance(self, agent, x = None, y = None):
+            return traci.vehicle.getCOEmission(agent)*deltaT  
+    def get_accumulated_distance(self, agent, x = None, y = None)->float:
         try:
             return traci.vehicle.getDrivingDistance2D(agent.id, agent.origin.src_node.x, agent.origin.src_node.y)
         except AttributeError:
             return traci.vehicle.getDrivingDistance2D(agent, x, y)
     
-    def get_follower(self, agent, dist=0, as_agent=False, _class=None)-> tuple[str, float]:
+    def get_follower(self, agent, dist=0, as_agent=False, _class=None):
         try:
             return self.return_agent[as_agent](agent,traci.vehicle.getFollower(agent.id, dist=dist), _class)
         except AttributeError:
@@ -43,40 +38,34 @@ class Vehicle_info():
         try:
             return self.return_agent[as_agent](agent,traci.vehicle.getLeader(agent.id, dist=dist), _class)
         except AttributeError:
-            return self.return_agent[as_agent](agent,traci.vehicle.getLeader(agent, dist=dist), _class)
-    
-    def get_fuel_consumption(self, agent, deltaT = 1):
+            return self.return_agent[as_agent](agent,traci.vehicle.getLeader(agent, dist=dist), _class) 
+    def get_fuel_consumption(self, agent, deltaT = 1)->float:
         try:
             return traci.vehicle.getFuelConsumption(agent.id)*agent.model.deltaT
         except AttributeError:
-            return traci.vehicle.getFuelConsumption(agent)*deltaT
-    
+            return traci.vehicle.getFuelConsumption(agent)*deltaT   
     def get_position(self, agent)-> tuple[float, float]:
         try:
             return traci.vehicle.getPosition(agent.id)
         except AttributeError:
-            return traci.vehicle.getPosition(agent)
-    
+            return traci.vehicle.getPosition(agent)   
     def get_speed(self, agent)-> float:
         try:
             return traci.vehicle.getSpeed(agent.id)
         except AttributeError:
-            return traci.vehicle.getSpeed(agent)
-        
-    def set_route(self, agent, road_list):            
+            return traci.vehicle.getSpeed(agent)       
+    def set_route(self, agent, road_list)->None:            
         try:
             edgeList = [agent.model.nx_to_sumo[road.id] for road in road_list]
             traci.vehicle.setRoute(agent.id, edgeList)
         except AttributeError:
             edgeList = [agent.model.nx_to_sumo[road] for road in road_list]
-            traci.vehicle.setRoute(agent, edgeList)
-    
-    def is_stopped(self, agent):
+            traci.vehicle.setRoute(agent, edgeList)   
+    def is_stopped(self, agent)->bool:
         try:
             return traci.vehicle.isStopped(agent.id)
         except AttributeError:
-            return traci.vehicle.isStopped(agent.id)
-    
+            return traci.vehicle.isStopped(agent.id)   
     def _return_agent(self, agent, id):
         return agent.model.agents[id]
     
@@ -114,3 +103,10 @@ class Road_info():
     
     def get_length(self, road):
         return traci.lane.getLength(road.sumo_id+"_0")
+    
+    def get_lane_number(self, road):
+        return traci.edge.getLaneNumber(road.sumo_id)
+
+class Junction_info():
+    def get_pos(self, junction):
+        return traci.junction.getPosition(str(junction.id))
