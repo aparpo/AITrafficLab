@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AITrafficLab.traffic_model &mdash; AITrafficLab 0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b489f392"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AITrafficLab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AITrafficLab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">AITrafficLab.traffic_model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for AITrafficLab.traffic_model</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">mesa</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">AITrafficLab.agents</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">AITrafficLab.generators</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">AITrafficLab.schedule</span> <span class="kn">import</span> <span class="n">GraphOrderedScheduler</span>
+
+<div class="viewcode-block" id="Traffic_model">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model">[docs]</a>
+<span class="k">class</span> <span class="nc">Traffic_model</span><span class="p">(</span><span class="n">mesa</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multiagent model for traffic simulations in urban networks.</span>
+
+<span class="sd">    :ivar connection: Traffic simulator abstraction.</span>
+<span class="sd">    :vartype connection: AITrafficLab.connection.Simulator_connection</span>
+<span class="sd">    :ivar graph: Graph associated to the urban network. Contains basic info such as travelling time, road length or road max speed.</span>
+<span class="sd">    :vartype graph: Networkx.DiGraph</span>
+<span class="sd">    :ivar line_graph: Line graph obtained from graph. It models the actual space where agents interact.</span>
+<span class="sd">    :vartype line_graph: Networkx.DiGraph</span>
+<span class="sd">    :ivar junctions: Collection of all junction agents present in the model.</span>
+<span class="sd">    :vartype junctions: dict[id, AITrafficLab.agents.Junction_agent]</span>
+<span class="sd">    :ivar roads: Collection of all road agents present in the model.</span>
+<span class="sd">    :vartype roads: dict[id, AITrafficLab.agents.Road_agent]</span>
+<span class="sd">    :ivar schedule: Activation order for the different agents. Also stores all the agent instances.</span>
+<span class="sd">    :vartype schedule: AITrafficLab.schedule.GraphOrderedActivation</span>
+<span class="sd">    :ivar to_destroy: Collection of all agents to be removed from the simulation in the next iteration.</span>
+<span class="sd">    :vartype to_destroy: list[AITrafficLab.agents.Vehicle_agent]</span>
+<span class="sd">    :ivar road_statistics: Information logged by the road agents. If set to, every road agent logs a value each iteration.</span>
+<span class="sd">                           Information is stored first by the metric name (e.g. &quot;time&quot;, &quot;co2&quot;), and then by the agents itself.</span>
+<span class="sd">                           Each agent can store any kind of object each iteration on its own list.</span>
+<span class="sd">                           After the end of the simulation, this attribute can be casted into a Pandas DataFrame.</span>
+<span class="sd">    :vartype road_statistics: dict[str, dict[AITrafficLab.agents.Road_agent,list[Object]]]</span>
+<span class="sd">    :ivar vehicle_statistics: Information logged by the vehicle agents. If set to, every vehicle agent logs a value each iteration.</span>
+<span class="sd">                           Information is stored first by the metric name (e.g. &quot;time&quot;, &quot;co2&quot;), and then by the agents itself.</span>
+<span class="sd">                           Each agent can store any kind of object each iteration on its own list.</span>
+<span class="sd">                           After the end of the simulation, this attribute can be casted into a Pandas DataFrame.</span>
+<span class="sd">    :vartype vehicle_statistics: dict[str, dict[AITrafficLab.agents.Vehicle_agent,list[Object]]]</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+<div class="viewcode-block" id="Traffic_model.__init__">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">graph_file</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">node_generator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">edge_generator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vehicle_generator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gui</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a Traffic_model instance.</span>
+
+<span class="sd">        :param graph_file: File where the simulation&#39;s graph info is stored.</span>
+<span class="sd">        :type graph_file: str</span>
+<span class="sd">        :param connection: Traffic simulator abstraction.</span>
+<span class="sd">        :type connection: AITrafficLab.connection.Simulator_connection</span>
+<span class="sd">        :param node_generator: Factory object in charge of creating node instances out of network junctions. </span>
+<span class="sd">                            If no node_generator is provided a basic AITrafficLab.generators.Node_generator is created.</span>
+<span class="sd">        :type node_generator: AITrafficLab.generators.Node_generator</span>
+<span class="sd">        :param edge_generator: Factory object in charge of creating edge instances out of network roads.</span>
+<span class="sd">                            If no edge_generator is provided a basic AITrafficLab.generators.Edge_generator is created.</span>
+<span class="sd">        :type edge_generator: AITrafficLab.generators.Edge_generator</span>
+<span class="sd">        :param vehicle_generator: Factory object in charge of creating vehicle instances. </span>
+<span class="sd">                                If no vehicle_generator is provided a basic AITrafficLab.generators.Dumb_vehicle_generator is created.</span>
+<span class="sd">        :type vehicle_generator: AITrafficLab.generators.Vehicle_generator</span>
+<span class="sd">        :param iters: Number of iterations to run the simulation before closing the connection.</span>
+<span class="sd">                    If no value is provided the simulation will keep on running forever or until there are no more vehicles left.</span>
+<span class="sd">        :type iters: int</span>
+<span class="sd">        :param gui: Indicates wether to launch or not the simulators Graffic User Interface.</span>
+<span class="sd">        :type gui: boolean</span>
+<span class="sd">        :param graph: Custom graph to be used. If no graph is provided, the network topology is infered from the network in graph_file.</span>
+<span class="sd">        :type graph: Networkx.DiGraph</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_file</span> <span class="o">=</span> <span class="n">graph_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gui</span> <span class="o">=</span> <span class="n">gui</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iters</span> <span class="o">=</span> <span class="n">iters</span>
+        <span class="k">if</span>  <span class="n">iters</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">iters</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_eternal</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_iters</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">(</span><span class="n">ox</span><span class="o">.</span><span class="n">graph_from_xml</span><span class="p">(</span><span class="n">graph_file</span><span class="o">+</span><span class="s1">&#39;.osm.xml&#39;</span><span class="p">))</span>
+
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">node_generator</span><span class="p">:</span>
+            <span class="n">node_generator</span> <span class="o">=</span> <span class="n">Node_generator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_generator</span> <span class="o">=</span> <span class="n">node_generator</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">edge_generator</span><span class="p">:</span>
+            <span class="n">edge_generator</span> <span class="o">=</span> <span class="n">Edge_generator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_generator</span> <span class="o">=</span> <span class="n">edge_generator</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">vehicle_generator</span><span class="p">:</span>
+            <span class="n">vehicle_generator</span> <span class="o">=</span> <span class="n">Dumb_vehicle_generator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_generator</span> <span class="o">=</span> <span class="n">vehicle_generator</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">junctions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roads</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_destroy</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize</span><span class="p">()</span></div>
+
+        
+    
+<div class="viewcode-block" id="Traffic_model._initialize">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model._initialize">[docs]</a>
+    <span class="k">def</span> <span class="nf">_initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets up the conditions needed for the simulation to run: </span>
+<span class="sd">            -Starts the simulator&#39;s connection</span>
+<span class="sd">            -Reads the information from the graph_file.</span>
+<span class="sd">            -Creates all the node and edge agents</span>
+<span class="sd">            -Closes the connection to avoid resource waste until simulation is started.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_file</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">deltaT</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">get_step_time</span><span class="p">()</span>            
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sumo_to_nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nx_to_sumo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">load_information</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">line_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">line_graph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">mesa</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">NetworkGrid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">line_graph</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">GraphOrderedScheduler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_generator</span><span class="o">.</span><span class="n">get_classes</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_generator</span><span class="o">.</span><span class="n">get_classes</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_generator</span><span class="o">.</span><span class="n">create_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">junctions</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">]</span><span class="o">=</span><span class="n">node</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">place</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_generator</span><span class="o">.</span><span class="n">create_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">roads</span><span class="p">[</span><span class="n">edge</span><span class="o">.</span><span class="n">id</span><span class="p">]</span><span class="o">=</span><span class="n">edge</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">place</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Traffic_model.start">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model.start">[docs]</a>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Starts the traffic simulation. Adds at least one vehicle agent, then creates an initial vehicle batch.</span>
+<span class="sd">        The simulation will either run forever or for a set number of iterations depending on the value of the attribute iters.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="p">)</span>
+        <span class="n">vehicle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_generator</span><span class="o">.</span><span class="n">generate_vehicle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">road</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">vehicle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_generator</span><span class="o">.</span><span class="n">initial_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">road</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_strategy</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Traffic_model.reset">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears the information logged by the agents. May be used to run several simulation by restarting the model every time.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">road_statistics</span> <span class="o">=</span> <span class="p">{</span><span class="n">stat</span><span class="p">:</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">stat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_generator</span><span class="o">.</span><span class="n">observables</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_statistics</span> <span class="o">=</span> <span class="p">{</span><span class="n">stat</span><span class="p">:</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">stat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_generator</span><span class="o">.</span><span class="n">observables</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_statistics</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Traffic_model.step">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model.step">[docs]</a>
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executes one iteration by running the logic of the model:</span>
+<span class="sd">            - Creates new agents each iteration</span>
+<span class="sd">            - Awakes the agents acording to the schedule&#39;s logic</span>
+<span class="sd">            - Runs one step simulation on the traffic simulator</span>
+<span class="sd">        &quot;&quot;&quot;</span>       
+        <span class="k">for</span> <span class="n">vehicle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_generator</span><span class="o">.</span><span class="n">generate_vehicles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">road</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">simulation_step</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_purge</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Traffic_model._start_eternal">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model._start_eternal">[docs]</a>
+    <span class="k">def</span> <span class="nf">_start_eternal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the simulation until it finishes.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">is_simulation_running</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_destroy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Traffic_model._start_iters">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model._start_iters">[docs]</a>
+    <span class="k">def</span> <span class="nf">_start_iters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the simulation for a set amount of iterations. Tracks the progress of the simulation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iters</span><span class="p">),</span> <span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;Current simulation progress&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">manage_exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_destroy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Traffic_model._purge">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model._purge">[docs]</a>
+    <span class="k">def</span> <span class="nf">_purge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls the on_destroy method for each agent stored in to_destroy and then removes it completely from the simulation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="k">for</span> <span class="n">deleted_agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_destroy</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">deleted_agent</span><span class="o">.</span><span class="n">on_destroy</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">remove_agent</span><span class="p">(</span><span class="n">deleted_agent</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">deleted_agent</span><span class="p">)</span>
+                
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">to_destroy</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">deleted_agent</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Traffic_model._destroy">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model._destroy">[docs]</a>
+    <span class="k">def</span> <span class="nf">_destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the remaining agents.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="n">vehicles</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">vehicle</span> <span class="k">for</span> <span class="n">vehicle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">agents</span> <span class="k">if</span>
+                <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">_class</span><span class="p">)</span> <span class="k">for</span> <span class="n">_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_generator</span><span class="o">.</span><span class="n">get_classes</span><span class="p">())</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">vehicles</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">to_destroy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_purge</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Traffic_model.add_agent">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.traffic_model.Traffic_model.add_agent">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">place</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an agent to the model. If the agent is a vehicle it&#39;s added to the traffic simulator too.</span>
+
+<span class="sd">        :param agent: Agent to be added</span>
+<span class="sd">        :type agent: Mesa.Agent</span>
+<span class="sd">        :param place: Road&#39;s id where to place the agent if it&#39;s a vehicle.</span>
+<span class="sd">        :type place: tuple[int,int]</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">Vehicle_agent</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">add_vehicle</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">place</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="n">place</span><span class="p">)</span></div>
+</div>
+
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Álvaro Martínez Parpolowicz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

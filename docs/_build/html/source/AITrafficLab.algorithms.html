@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AITrafficLab.algorithms package &mdash; AITrafficLab 0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=b489f392"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AITrafficLab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">AITrafficLab.algorithms package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-AITrafficLab.algorithms.iaco">AITrafficLab.algorithms.iaco module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.iaco.Inverted_ant"><code class="docutils literal notranslate"><span class="pre">Inverted_ant</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.iaco.Inverted_ant.on_destroy"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.on_destroy()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.iaco.Inverted_ant.reroute"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.reroute()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.iaco.Inverted_ant.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.iaco.Inverted_road"><code class="docutils literal notranslate"><span class="pre">Inverted_road</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.iaco.Inverted_road.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_road.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aitrafficlab-algorithms-iaco-train-module">AITrafficLab.algorithms.iaco_train module</a></li>
+<li><a class="reference internal" href="#module-AITrafficLab.algorithms.ipr">AITrafficLab.algorithms.ipr module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.ipr.Inverted_ant"><code class="docutils literal notranslate"><span class="pre">Inverted_ant</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.ipr.Inverted_ant.on_destroy"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.on_destroy()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.ipr.Inverted_ant.reroute"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.reroute()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.ipr.Inverted_ant.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.ipr.Inverted_road"><code class="docutils literal notranslate"><span class="pre">Inverted_road</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.ipr.Inverted_road.get_congestion"><code class="docutils literal notranslate"><span class="pre">Inverted_road.get_congestion()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.ipr.Inverted_road.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_road.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab.algorithms.siaco">AITrafficLab.algorithms.siaco module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant"><code class="docutils literal notranslate"><span class="pre">Sonic_ant</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant.get_delay"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.get_delay()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant.get_pheromone"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.get_pheromone()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant.get_pos"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.get_pos()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant.move"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.move()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant.on_destroy"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.on_destroy()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant.reroute"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.reroute()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_ant.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_edge_generator"><code class="docutils literal notranslate"><span class="pre">Sonic_edge_generator</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_edge_generator.create_edges"><code class="docutils literal notranslate"><span class="pre">Sonic_edge_generator.create_edges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction"><code class="docutils literal notranslate"><span class="pre">Sonic_junction</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.compute_edge_propagation"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.compute_edge_propagation()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.get_graph"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.get_graph()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.get_pheromone"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.get_pheromone()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.get_pos"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.get_pos()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.log_change"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.log_change()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.log_incoming_edge"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.log_incoming_edge()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.log_outcoming_edge"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.log_outcoming_edge()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction_generator"><code class="docutils literal notranslate"><span class="pre">Sonic_junction_generator</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.Sonic_junction_generator.create_nodes"><code class="docutils literal notranslate"><span class="pre">Sonic_junction_generator.create_nodes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.algorithms.siaco.percieve_pheromone"><code class="docutils literal notranslate"><span class="pre">percieve_pheromone()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aitrafficlab-algorithms-siaco-train-module">AITrafficLab.algorithms.siaco_train module</a></li>
+<li><a class="reference internal" href="#module-AITrafficLab.algorithms">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AITrafficLab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">AITrafficLab.algorithms package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/AITrafficLab.algorithms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aitrafficlab-algorithms-package">
+<h1>AITrafficLab.algorithms package<a class="headerlink" href="#aitrafficlab-algorithms-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-AITrafficLab.algorithms.iaco">
+<span id="aitrafficlab-algorithms-iaco-module"></span><h2>AITrafficLab.algorithms.iaco module<a class="headerlink" href="#module-AITrafficLab.algorithms.iaco" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.iaco.Inverted_ant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.iaco.</span></span><span class="sig-name descname"><span class="pre">Inverted_ant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deposit_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/iaco.html#Inverted_ant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.iaco.Inverted_ant" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle_agent</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.iaco.Inverted_ant.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/iaco.html#Inverted_ant.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.iaco.Inverted_ant.on_destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.iaco.Inverted_ant.reroute">
+<span class="sig-name descname"><span class="pre">reroute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/iaco.html#Inverted_ant.reroute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.iaco.Inverted_ant.reroute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.iaco.Inverted_ant.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/iaco.html#Inverted_ant.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.iaco.Inverted_ant.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.iaco.Inverted_road">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.iaco.</span></span><span class="sig-name descname"><span class="pre">Inverted_road</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheromone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaporation_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/iaco.html#Inverted_road"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.iaco.Inverted_road" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Road_agent</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.iaco.Inverted_road.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/iaco.html#Inverted_road.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.iaco.Inverted_road.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="aitrafficlab-algorithms-iaco-train-module">
+<h2>AITrafficLab.algorithms.iaco_train module<a class="headerlink" href="#aitrafficlab-algorithms-iaco-train-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-AITrafficLab.algorithms.ipr">
+<span id="aitrafficlab-algorithms-ipr-module"></span><h2>AITrafficLab.algorithms.ipr module<a class="headerlink" href="#module-AITrafficLab.algorithms.ipr" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.ipr.Inverted_ant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.ipr.</span></span><span class="sig-name descname"><span class="pre">Inverted_ant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deposit_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/ipr.html#Inverted_ant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.ipr.Inverted_ant" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle_agent</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.ipr.Inverted_ant.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/ipr.html#Inverted_ant.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.ipr.Inverted_ant.on_destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.ipr.Inverted_ant.reroute">
+<span class="sig-name descname"><span class="pre">reroute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/ipr.html#Inverted_ant.reroute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.ipr.Inverted_ant.reroute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.ipr.Inverted_ant.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/ipr.html#Inverted_ant.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.ipr.Inverted_ant.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.ipr.Inverted_road">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.ipr.</span></span><span class="sig-name descname"><span class="pre">Inverted_road</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheromone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaporation_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/ipr.html#Inverted_road"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.ipr.Inverted_road" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Road_agent</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.ipr.Inverted_road.get_congestion">
+<span class="sig-name descname"><span class="pre">get_congestion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/ipr.html#Inverted_road.get_congestion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.ipr.Inverted_road.get_congestion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.ipr.Inverted_road.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/ipr.html#Inverted_road.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.ipr.Inverted_road.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab.algorithms.siaco">
+<span id="aitrafficlab-algorithms-siaco-module"></span><h2>AITrafficLab.algorithms.siaco module<a class="headerlink" href="#module-AITrafficLab.algorithms.siaco" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.siaco.</span></span><span class="sig-name descname"><span class="pre">Sonic_ant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheromone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sonic_ant'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="AITrafficLab.html#AITrafficLab.agents.Vehicle_agent" title="AITrafficLab.agents.Vehicle_agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle_agent</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant.get_delay">
+<span class="sig-name descname"><span class="pre">get_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impulse</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant.get_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant.get_delay" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant.get_pheromone">
+<span class="sig-name descname"><span class="pre">get_pheromone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant.get_pheromone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant.get_pheromone" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant.get_pos">
+<span class="sig-name descname"><span class="pre">get_pos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant.get_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant.get_pos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant.move">
+<span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant.move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant.move" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant.on_destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant.reroute">
+<span class="sig-name descname"><span class="pre">reroute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant.reroute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant.reroute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_ant.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_ant.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_ant.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_edge_generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.siaco.</span></span><span class="sig-name descname"><span class="pre">Sonic_edge_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_coef=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lane_coef=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">len_coef=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_central_coef=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_central_coef=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_observables={}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_class=&lt;class</span> <span class="pre">'AITrafficLab.agents.Road_agent'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_speed=33.33</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lanes=4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_length=3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon=0.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_edge_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_edge_generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="AITrafficLab.html#AITrafficLab.generators.Edge_generator" title="AITrafficLab.generators.Edge_generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Edge_generator</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_edge_generator.create_edges">
+<span class="sig-name descname"><span class="pre">create_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_edge_generator.create_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_edge_generator.create_edges" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.siaco.</span></span><span class="sig-name descname"><span class="pre">Sonic_junction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="AITrafficLab.html#AITrafficLab.agents.Junction_agent" title="AITrafficLab.agents.Junction_agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Junction_agent</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.compute_edge_propagation">
+<span class="sig-name descname"><span class="pre">compute_edge_propagation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incoming</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.compute_edge_propagation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.compute_edge_propagation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.get_graph">
+<span class="sig-name descname"><span class="pre">get_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.get_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.get_graph" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.get_pheromone">
+<span class="sig-name descname"><span class="pre">get_pheromone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.get_pheromone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.get_pheromone" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.get_pos">
+<span class="sig-name descname"><span class="pre">get_pos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.get_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.get_pos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.log_change">
+<span class="sig-name descname"><span class="pre">log_change</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_to</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.log_change"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.log_change" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.log_incoming_edge">
+<span class="sig-name descname"><span class="pre">log_incoming_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incoming</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.log_incoming_edge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.log_incoming_edge" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.log_outcoming_edge">
+<span class="sig-name descname"><span class="pre">log_outcoming_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outcoming</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.log_outcoming_edge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.log_outcoming_edge" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction_generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.siaco.</span></span><span class="sig-name descname"><span class="pre">Sonic_junction_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_class=&lt;class</span> <span class="pre">'AITrafficLab.agents.Junction_agent'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction_generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="AITrafficLab.html#AITrafficLab.generators.Node_generator" title="AITrafficLab.generators.Node_generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node_generator</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.Sonic_junction_generator.create_nodes">
+<span class="sig-name descname"><span class="pre">create_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#Sonic_junction_generator.create_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.Sonic_junction_generator.create_nodes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="AITrafficLab.algorithms.siaco.percieve_pheromone">
+<span class="sig-prename descclassname"><span class="pre">AITrafficLab.algorithms.siaco.</span></span><span class="sig-name descname"><span class="pre">percieve_pheromone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incoming</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leader_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/algorithms/siaco.html#percieve_pheromone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.algorithms.siaco.percieve_pheromone" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="aitrafficlab-algorithms-siaco-train-module">
+<h2>AITrafficLab.algorithms.siaco_train module<a class="headerlink" href="#aitrafficlab-algorithms-siaco-train-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-AITrafficLab.algorithms">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-AITrafficLab.algorithms" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Álvaro Martínez Parpolowicz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

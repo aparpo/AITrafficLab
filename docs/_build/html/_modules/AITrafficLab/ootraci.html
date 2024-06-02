@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AITrafficLab.ootraci &mdash; AITrafficLab 0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b489f392"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AITrafficLab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AITrafficLab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">AITrafficLab.ootraci</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for AITrafficLab.ootraci</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">traci</span>
+
+<div class="viewcode-block" id="Vehicle_info">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info">[docs]</a>
+<span class="k">class</span> <span class="nc">Vehicle_info</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_agent</span> <span class="o">=</span> <span class="p">{</span><span class="kc">True</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_agent</span><span class="p">,</span> <span class="kc">False</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_id</span><span class="p">}</span>
+<div class="viewcode-block" id="Vehicle_info.get_road">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_road">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_road</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getRoadID</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Vehicle_info.get_acceleration">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_acceleration">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_acceleration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getAcceleration</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getAcceleration</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span> </div>
+
+<div class="viewcode-block" id="Vehicle_info.get_co2_emission">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_co2_emission">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_co2_emission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">deltaT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getCO2Emission</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getCO2Emission</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span><span class="o">*</span><span class="n">deltaT</span>  </div>
+
+<div class="viewcode-block" id="Vehicle_info.get_co_emission">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_co_emission">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_co_emission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">deltaT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getCOEmission</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getCOEmission</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span><span class="o">*</span><span class="n">deltaT</span>  </div>
+
+<div class="viewcode-block" id="Vehicle_info.get_accumulated_distance">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_accumulated_distance">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_accumulated_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getDrivingDistance2D</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">src_node</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">src_node</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getDrivingDistance2D</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Vehicle_info.get_follower">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_follower">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_follower</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">as_agent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_agent</span><span class="p">[</span><span class="n">as_agent</span><span class="p">](</span><span class="n">agent</span><span class="p">,</span><span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getFollower</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">),</span> <span class="n">_class</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_agent</span><span class="p">[</span><span class="n">as_agent</span><span class="p">](</span><span class="n">agent</span><span class="p">,</span><span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getFollower</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">),</span> <span class="n">_class</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Vehicle_info.get_leader">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_leader">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_leader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">as_agent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">_class</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_agent</span><span class="p">[</span><span class="n">as_agent</span><span class="p">](</span><span class="n">agent</span><span class="p">,</span><span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getLeader</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">),</span> <span class="n">_class</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_agent</span><span class="p">[</span><span class="n">as_agent</span><span class="p">](</span><span class="n">agent</span><span class="p">,</span><span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getLeader</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">),</span> <span class="n">_class</span><span class="p">)</span> </div>
+
+<div class="viewcode-block" id="Vehicle_info.get_fuel_consumption">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_fuel_consumption">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_fuel_consumption</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">deltaT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getFuelConsumption</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getFuelConsumption</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span><span class="o">*</span><span class="n">deltaT</span>   </div>
+
+<div class="viewcode-block" id="Vehicle_info.get_position">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_position">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getPosition</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getPosition</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>   </div>
+
+<div class="viewcode-block" id="Vehicle_info.get_speed">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.get_speed">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getSpeed</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">getSpeed</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>       </div>
+
+<div class="viewcode-block" id="Vehicle_info.set_route">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.set_route">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">road_list</span><span class="p">)</span><span class="o">-&gt;</span><span class="kc">None</span><span class="p">:</span>            
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">nx_to_sumo</span><span class="p">[</span><span class="n">road</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="k">for</span> <span class="n">road</span> <span class="ow">in</span> <span class="n">road_list</span><span class="p">]</span>
+            <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">setRoute</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">edgeList</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">nx_to_sumo</span><span class="p">[</span><span class="n">road</span><span class="p">]</span> <span class="k">for</span> <span class="n">road</span> <span class="ow">in</span> <span class="n">road_list</span><span class="p">]</span>
+            <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">setRoute</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">edgeList</span><span class="p">)</span>   </div>
+
+<div class="viewcode-block" id="Vehicle_info.is_stopped">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Vehicle_info.is_stopped">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_stopped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">isStopped</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">isStopped</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>   </div>
+
+    <span class="k">def</span> <span class="nf">_return_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">agent</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">_return_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">id</span></div>
+
+    
+<div class="viewcode-block" id="Road_info">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info">[docs]</a>
+<span class="k">class</span> <span class="nc">Road_info</span><span class="p">():</span>
+
+    <span class="c1"># def __init__(self):</span>
+    <span class="c1">#     self.return_agent = {True: self._return_agent, False: self._return_id}</span>
+
+<div class="viewcode-block" id="Road_info.get_co2_emission">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_co2_emission">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_co2_emission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getCO2Emission</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span><span class="o">*</span><span class="n">road</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_co_emission">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_co_emission">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_co_emission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getCOEmission</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span><span class="o">*</span><span class="n">road</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_co_electricity_consumption">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_co_electricity_consumption">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_co_electricity_consumption</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getElectricityConsumption</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span><span class="o">*</span><span class="n">road</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_fuel_consumption">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_fuel_consumption">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_fuel_consumption</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getFuelConsumption</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span><span class="o">*</span><span class="n">road</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_hce_emission">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_hce_emission">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_hce_emission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getHCEmission</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span><span class="o">*</span><span class="n">road</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_nox_emission">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_nox_emission">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_nox_emission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getNOxEmission</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span><span class="o">*</span><span class="n">road</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_noise_emission">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_noise_emission">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_noise_emission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getNoiseEmission</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span><span class="o">*</span><span class="n">road</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deltaT</span></div>
+
+
+<div class="viewcode-block" id="Road_info.get_max_speed">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_max_speed">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_max_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">lane</span><span class="o">.</span><span class="n">getMaxSpeed</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="o">+</span><span class="s2">&quot;_0&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_length">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_length">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">lane</span><span class="o">.</span><span class="n">getLength</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="o">+</span><span class="s2">&quot;_0&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Road_info.get_lane_number">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Road_info.get_lane_number">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_lane_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">getLaneNumber</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">sumo_id</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="Junction_info">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Junction_info">[docs]</a>
+<span class="k">class</span> <span class="nc">Junction_info</span><span class="p">():</span>
+<div class="viewcode-block" id="Junction_info.get_pos">
+<a class="viewcode-back" href="../../source/AITrafficLab.html#AITrafficLab.ootraci.Junction_info.get_pos">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">junction</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traci</span><span class="o">.</span><span class="n">junction</span><span class="o">.</span><span class="n">getPosition</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">junction</span><span class="o">.</span><span class="n">id</span><span class="p">))</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Álvaro Martínez Parpolowicz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

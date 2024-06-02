@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AITrafficLab package &mdash; AITrafficLab 0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=b489f392"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AITrafficLab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">AITrafficLab package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-AITrafficLab.agents">AITrafficLab.agents module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.agents.Dijkstra_vehicle"><code class="docutils literal notranslate"><span class="pre">Dijkstra_vehicle</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.agents.Dijkstra_vehicle.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Dijkstra_vehicle.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Junction_agent"><code class="docutils literal notranslate"><span class="pre">Junction_agent</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.agents.Junction_agent.on_destroy"><code class="docutils literal notranslate"><span class="pre">Junction_agent.on_destroy()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Junction_agent.set_property"><code class="docutils literal notranslate"><span class="pre">Junction_agent.set_property()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Junction_agent.step"><code class="docutils literal notranslate"><span class="pre">Junction_agent.step()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Junction_agent.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Junction_agent.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent"><code class="docutils literal notranslate"><span class="pre">Road_agent</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.get_agent_by_pos"><code class="docutils literal notranslate"><span class="pre">Road_agent.get_agent_by_pos()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.get_first"><code class="docutils literal notranslate"><span class="pre">Road_agent.get_first()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.get_follower"><code class="docutils literal notranslate"><span class="pre">Road_agent.get_follower()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.get_last"><code class="docutils literal notranslate"><span class="pre">Road_agent.get_last()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.get_leader"><code class="docutils literal notranslate"><span class="pre">Road_agent.get_leader()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.get_vehicles"><code class="docutils literal notranslate"><span class="pre">Road_agent.get_vehicles()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.on_destroy"><code class="docutils literal notranslate"><span class="pre">Road_agent.on_destroy()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.set_property"><code class="docutils literal notranslate"><span class="pre">Road_agent.set_property()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.step"><code class="docutils literal notranslate"><span class="pre">Road_agent.step()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Road_agent.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Road_agent.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent"><code class="docutils literal notranslate"><span class="pre">Vehicle_agent</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent.check_road_change"><code class="docutils literal notranslate"><span class="pre">Vehicle_agent.check_road_change()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent.move"><code class="docutils literal notranslate"><span class="pre">Vehicle_agent.move()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent.next_id"><code class="docutils literal notranslate"><span class="pre">Vehicle_agent.next_id</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent.on_destroy"><code class="docutils literal notranslate"><span class="pre">Vehicle_agent.on_destroy()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent.step"><code class="docutils literal notranslate"><span class="pre">Vehicle_agent.step()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Vehicle_agent.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.agents.Yen_vehicle"><code class="docutils literal notranslate"><span class="pre">Yen_vehicle</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.agents.Yen_vehicle.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Yen_vehicle.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab.batch">AITrafficLab.batch module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.batch.Batch_proccessing"><code class="docutils literal notranslate"><span class="pre">Batch_proccessing</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.batch.Batch_proccessing.simulate"><code class="docutils literal notranslate"><span class="pre">Batch_proccessing.simulate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab.connection">AITrafficLab.connection module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection"><code class="docutils literal notranslate"><span class="pre">Simulator_connection</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.add_vehicle"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.add_vehicle()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.close"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.close()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.get_step_time"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.get_step_time()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.is_simulation_running"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.is_simulation_running()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.is_valid_route"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.is_valid_route()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.load_information"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.load_information()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.manage_exception"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.manage_exception()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.simulation_step"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.simulation_step()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Simulator_connection.start"><code class="docutils literal notranslate"><span class="pre">Simulator_connection.start()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection"><code class="docutils literal notranslate"><span class="pre">Sumo_connection</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.add_vehicle"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.add_vehicle()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.close"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.close()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.get_step_time"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.get_step_time()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.import_data_from"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.import_data_from()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.is_simulation_running"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.is_simulation_running()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.is_valid_route"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.is_valid_route()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.load_information"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.load_information()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.manage_exception"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.manage_exception()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.simulation_step"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.simulation_step()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.connection.Sumo_connection.start"><code class="docutils literal notranslate"><span class="pre">Sumo_connection.start()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab.error_codes">AITrafficLab.error_codes module</a></li>
+<li><a class="reference internal" href="#module-AITrafficLab.generators">AITrafficLab.generators module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.generators.Dumb_vehicle_generator"><code class="docutils literal notranslate"><span class="pre">Dumb_vehicle_generator</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.generators.Dumb_vehicle_generator.generate_vehicle"><code class="docutils literal notranslate"><span class="pre">Dumb_vehicle_generator.generate_vehicle()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Dumb_vehicle_generator.generate_vehicles"><code class="docutils literal notranslate"><span class="pre">Dumb_vehicle_generator.generate_vehicles()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Dumb_vehicle_generator.get_vehicle_number"><code class="docutils literal notranslate"><span class="pre">Dumb_vehicle_generator.get_vehicle_number()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Dumb_vehicle_generator.initial_generation"><code class="docutils literal notranslate"><span class="pre">Dumb_vehicle_generator.initial_generation()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Edge_generator"><code class="docutils literal notranslate"><span class="pre">Edge_generator</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.generators.Edge_generator.create_edges"><code class="docutils literal notranslate"><span class="pre">Edge_generator.create_edges()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Edge_generator.get_classes"><code class="docutils literal notranslate"><span class="pre">Edge_generator.get_classes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Node_generator"><code class="docutils literal notranslate"><span class="pre">Node_generator</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.generators.Node_generator.create_nodes"><code class="docutils literal notranslate"><span class="pre">Node_generator.create_nodes()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Node_generator.get_classes"><code class="docutils literal notranslate"><span class="pre">Node_generator.get_classes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Random_vehicle_generator"><code class="docutils literal notranslate"><span class="pre">Random_vehicle_generator</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.generators.Random_vehicle_generator.generate_vehicle"><code class="docutils literal notranslate"><span class="pre">Random_vehicle_generator.generate_vehicle()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Random_vehicle_generator.generate_vehicles"><code class="docutils literal notranslate"><span class="pre">Random_vehicle_generator.generate_vehicles()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Random_vehicle_generator.get_vehicle_number"><code class="docutils literal notranslate"><span class="pre">Random_vehicle_generator.get_vehicle_number()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Random_vehicle_generator.initial_generation"><code class="docutils literal notranslate"><span class="pre">Random_vehicle_generator.initial_generation()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator"><code class="docutils literal notranslate"><span class="pre">Vehicle_generator</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator.generate_vehicle"><code class="docutils literal notranslate"><span class="pre">Vehicle_generator.generate_vehicle()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator.generate_vehicles"><code class="docutils literal notranslate"><span class="pre">Vehicle_generator.generate_vehicles()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator.get_classes"><code class="docutils literal notranslate"><span class="pre">Vehicle_generator.get_classes()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator.initial_generation"><code class="docutils literal notranslate"><span class="pre">Vehicle_generator.initial_generation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab.ootraci">AITrafficLab.ootraci module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Junction_info"><code class="docutils literal notranslate"><span class="pre">Junction_info</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Junction_info.get_pos"><code class="docutils literal notranslate"><span class="pre">Junction_info.get_pos()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info"><code class="docutils literal notranslate"><span class="pre">Road_info</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_co2_emission"><code class="docutils literal notranslate"><span class="pre">Road_info.get_co2_emission()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_co_electricity_consumption"><code class="docutils literal notranslate"><span class="pre">Road_info.get_co_electricity_consumption()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_co_emission"><code class="docutils literal notranslate"><span class="pre">Road_info.get_co_emission()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_fuel_consumption"><code class="docutils literal notranslate"><span class="pre">Road_info.get_fuel_consumption()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_hce_emission"><code class="docutils literal notranslate"><span class="pre">Road_info.get_hce_emission()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_lane_number"><code class="docutils literal notranslate"><span class="pre">Road_info.get_lane_number()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_length"><code class="docutils literal notranslate"><span class="pre">Road_info.get_length()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_max_speed"><code class="docutils literal notranslate"><span class="pre">Road_info.get_max_speed()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_noise_emission"><code class="docutils literal notranslate"><span class="pre">Road_info.get_noise_emission()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Road_info.get_nox_emission"><code class="docutils literal notranslate"><span class="pre">Road_info.get_nox_emission()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info"><code class="docutils literal notranslate"><span class="pre">Vehicle_info</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_acceleration"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_acceleration()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_accumulated_distance"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_accumulated_distance()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_co2_emission"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_co2_emission()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_co_emission"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_co_emission()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_follower"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_follower()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_fuel_consumption"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_fuel_consumption()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_leader"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_leader()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_position"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_position()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_road"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_road()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.get_speed"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.get_speed()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.is_stopped"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.is_stopped()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.ootraci.Vehicle_info.set_route"><code class="docutils literal notranslate"><span class="pre">Vehicle_info.set_route()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab.schedule">AITrafficLab.schedule module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.schedule.GraphOrderedScheduler"><code class="docutils literal notranslate"><span class="pre">GraphOrderedScheduler</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.schedule.GraphOrderedScheduler.add"><code class="docutils literal notranslate"><span class="pre">GraphOrderedScheduler.add()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.schedule.GraphOrderedScheduler.get_agent_count"><code class="docutils literal notranslate"><span class="pre">GraphOrderedScheduler.get_agent_count()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.schedule.GraphOrderedScheduler.remove"><code class="docutils literal notranslate"><span class="pre">GraphOrderedScheduler.remove()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.schedule.GraphOrderedScheduler.sort_agents"><code class="docutils literal notranslate"><span class="pre">GraphOrderedScheduler.sort_agents()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.schedule.GraphOrderedScheduler.step"><code class="docutils literal notranslate"><span class="pre">GraphOrderedScheduler.step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab.traffic_model">AITrafficLab.traffic_model module</a><ul>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model"><code class="docutils literal notranslate"><span class="pre">Traffic_model</span></code></a><ul>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model.__init__"><code class="docutils literal notranslate"><span class="pre">Traffic_model.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model._destroy"><code class="docutils literal notranslate"><span class="pre">Traffic_model._destroy()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model._initialize"><code class="docutils literal notranslate"><span class="pre">Traffic_model._initialize()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model._purge"><code class="docutils literal notranslate"><span class="pre">Traffic_model._purge()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model._start_eternal"><code class="docutils literal notranslate"><span class="pre">Traffic_model._start_eternal()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model._start_iters"><code class="docutils literal notranslate"><span class="pre">Traffic_model._start_iters()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model.add_agent"><code class="docutils literal notranslate"><span class="pre">Traffic_model.add_agent()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model.reset"><code class="docutils literal notranslate"><span class="pre">Traffic_model.reset()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model.start"><code class="docutils literal notranslate"><span class="pre">Traffic_model.start()</span></code></a></li>
+<li><a class="reference internal" href="#AITrafficLab.traffic_model.Traffic_model.step"><code class="docutils literal notranslate"><span class="pre">Traffic_model.step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-AITrafficLab">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AITrafficLab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">AITrafficLab package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/AITrafficLab.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aitrafficlab-package">
+<h1>AITrafficLab package<a class="headerlink" href="#aitrafficlab-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AITrafficLab.algorithms.html">AITrafficLab.algorithms package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AITrafficLab.algorithms.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AITrafficLab.algorithms.html#module-AITrafficLab.algorithms.iaco">AITrafficLab.algorithms.iaco module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.iaco.Inverted_ant"><code class="docutils literal notranslate"><span class="pre">Inverted_ant</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.iaco.Inverted_ant.on_destroy"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.on_destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.iaco.Inverted_ant.reroute"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.reroute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.iaco.Inverted_ant.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.iaco.Inverted_road"><code class="docutils literal notranslate"><span class="pre">Inverted_road</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.iaco.Inverted_road.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_road.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AITrafficLab.algorithms.html#aitrafficlab-algorithms-iaco-train-module">AITrafficLab.algorithms.iaco_train module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AITrafficLab.algorithms.html#module-AITrafficLab.algorithms.ipr">AITrafficLab.algorithms.ipr module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.ipr.Inverted_ant"><code class="docutils literal notranslate"><span class="pre">Inverted_ant</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.ipr.Inverted_ant.on_destroy"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.on_destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.ipr.Inverted_ant.reroute"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.reroute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.ipr.Inverted_ant.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_ant.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.ipr.Inverted_road"><code class="docutils literal notranslate"><span class="pre">Inverted_road</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.ipr.Inverted_road.get_congestion"><code class="docutils literal notranslate"><span class="pre">Inverted_road.get_congestion()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.ipr.Inverted_road.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Inverted_road.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AITrafficLab.algorithms.html#module-AITrafficLab.algorithms.siaco">AITrafficLab.algorithms.siaco module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant"><code class="docutils literal notranslate"><span class="pre">Sonic_ant</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant.get_delay"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.get_delay()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant.get_pheromone"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.get_pheromone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant.get_pos"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.get_pos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant.move"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant.on_destroy"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.on_destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant.reroute"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.reroute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_ant.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Sonic_ant.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_edge_generator"><code class="docutils literal notranslate"><span class="pre">Sonic_edge_generator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_edge_generator.create_edges"><code class="docutils literal notranslate"><span class="pre">Sonic_edge_generator.create_edges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction"><code class="docutils literal notranslate"><span class="pre">Sonic_junction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.compute_edge_propagation"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.compute_edge_propagation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.get_graph"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.get_graph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.get_pheromone"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.get_pheromone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.get_pos"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.get_pos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.log_change"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.log_change()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.log_incoming_edge"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.log_incoming_edge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.log_outcoming_edge"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.log_outcoming_edge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction.step_behaviour"><code class="docutils literal notranslate"><span class="pre">Sonic_junction.step_behaviour()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction_generator"><code class="docutils literal notranslate"><span class="pre">Sonic_junction_generator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.Sonic_junction_generator.create_nodes"><code class="docutils literal notranslate"><span class="pre">Sonic_junction_generator.create_nodes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="AITrafficLab.algorithms.html#AITrafficLab.algorithms.siaco.percieve_pheromone"><code class="docutils literal notranslate"><span class="pre">percieve_pheromone()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AITrafficLab.algorithms.html#aitrafficlab-algorithms-siaco-train-module">AITrafficLab.algorithms.siaco_train module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AITrafficLab.algorithms.html#module-AITrafficLab.algorithms">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-AITrafficLab.agents">
+<span id="aitrafficlab-agents-module"></span><h2>AITrafficLab.agents module<a class="headerlink" href="#module-AITrafficLab.agents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Dijkstra_vehicle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.agents.</span></span><span class="sig-name descname"><span class="pre">Dijkstra_vehicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Car'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Dijkstra_vehicle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Dijkstra_vehicle" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent" title="AITrafficLab.agents.Vehicle_agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle_agent</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Dijkstra_vehicle.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Dijkstra_vehicle.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Dijkstra_vehicle.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Junction_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.agents.</span></span><span class="sig-name descname"><span class="pre">Junction_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Junction_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Junction_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Junction_agent.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Junction_agent.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Junction_agent.on_destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Junction_agent.set_property">
+<span class="sig-name descname"><span class="pre">set_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Junction_agent.set_property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Junction_agent.set_property" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Junction_agent.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Junction_agent.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Junction_agent.step" title="Link to this definition"></a></dt>
+<dd><p>A single step of the agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Junction_agent.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Junction_agent.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Junction_agent.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.agents.</span></span><span class="sig-name descname"><span class="pre">Road_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#AITrafficLab.agents.Junction_agent" title="AITrafficLab.agents.Junction_agent"><span class="pre">Junction_agent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#AITrafficLab.agents.Junction_agent" title="AITrafficLab.agents.Junction_agent"><span class="pre">Junction_agent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.get_agent_by_pos">
+<span class="sig-name descname"><span class="pre">get_agent_by_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.get_agent_by_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.get_agent_by_pos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.get_first">
+<span class="sig-name descname"><span class="pre">get_first</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.get_first"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.get_first" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.get_follower">
+<span class="sig-name descname"><span class="pre">get_follower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.get_follower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.get_follower" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.get_last">
+<span class="sig-name descname"><span class="pre">get_last</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.get_last"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.get_last" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.get_leader">
+<span class="sig-name descname"><span class="pre">get_leader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.get_leader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.get_leader" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.get_vehicles">
+<span class="sig-name descname"><span class="pre">get_vehicles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.get_vehicles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.get_vehicles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.on_destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.set_property">
+<span class="sig-name descname"><span class="pre">set_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.set_property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.set_property" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.step" title="Link to this definition"></a></dt>
+<dd><p>A single step of the agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Road_agent.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Road_agent.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Road_agent.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Vehicle_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.agents.</span></span><span class="sig-name descname"><span class="pre">Vehicle_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#AITrafficLab.agents.Road_agent" title="AITrafficLab.agents.Road_agent"><span class="pre">Road_agent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#AITrafficLab.agents.Road_agent" title="AITrafficLab.agents.Road_agent"><span class="pre">Road_agent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Car'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Vehicle_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Vehicle_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Vehicle_agent.check_road_change">
+<span class="sig-name descname"><span class="pre">check_road_change</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sumo_road_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Vehicle_agent.check_road_change"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Vehicle_agent.check_road_change" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Vehicle_agent.move">
+<span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Vehicle_agent.move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Vehicle_agent.move" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Vehicle_agent.next_id">
+<span class="sig-name descname"><span class="pre">next_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#AITrafficLab.agents.Vehicle_agent.next_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Vehicle_agent.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Vehicle_agent.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Vehicle_agent.on_destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Vehicle_agent.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Vehicle_agent.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Vehicle_agent.step" title="Link to this definition"></a></dt>
+<dd><p>A single step of the agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Vehicle_agent.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Vehicle_agent.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Vehicle_agent.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Yen_vehicle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.agents.</span></span><span class="sig-name descname"><span class="pre">Yen_vehicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Car'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Yen_vehicle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Yen_vehicle" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent" title="AITrafficLab.agents.Vehicle_agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle_agent</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.agents.Yen_vehicle.step_behaviour">
+<span class="sig-name descname"><span class="pre">step_behaviour</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/agents.html#Yen_vehicle.step_behaviour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.agents.Yen_vehicle.step_behaviour" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab.batch">
+<span id="aitrafficlab-batch-module"></span><h2>AITrafficLab.batch module<a class="headerlink" href="#module-AITrafficLab.batch" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.batch.Batch_proccessing">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.batch.</span></span><span class="sig-name descname"><span class="pre">Batch_proccessing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">veh_agg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">veh_collection_agg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/batch.html#Batch_proccessing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.batch.Batch_proccessing" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.batch.Batch_proccessing.simulate">
+<span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulations</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/batch.html#Batch_proccessing.simulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.batch.Batch_proccessing.simulate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab.connection">
+<span id="aitrafficlab-connection-module"></span><h2>AITrafficLab.connection module<a class="headerlink" href="#module-AITrafficLab.connection" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.connection.</span></span><span class="sig-name descname"><span class="pre">Simulator_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">road_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">junction_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.add_vehicle">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_vehicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.add_vehicle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.add_vehicle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.close">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.get_step_time">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_step_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.get_step_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.get_step_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.is_simulation_running">
+<span class="sig-name descname"><span class="pre">is_simulation_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.is_simulation_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.is_simulation_running" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.is_valid_route">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.is_valid_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.is_valid_route" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.load_information">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Graph</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.load_information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.load_information" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.manage_exception">
+<span class="sig-name descname"><span class="pre">manage_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.manage_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.manage_exception" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.simulation_step">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simulation_step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.simulation_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.simulation_step" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Simulator_connection.start">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gui</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Simulator_connection.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Simulator_connection.start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.connection.</span></span><span class="sig-name descname"><span class="pre">Sumo_connection</span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AITrafficLab.connection.Simulator_connection" title="AITrafficLab.connection.Simulator_connection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator_connection</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.add_vehicle">
+<span class="sig-name descname"><span class="pre">add_vehicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.add_vehicle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.add_vehicle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.get_step_time">
+<span class="sig-name descname"><span class="pre">get_step_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.get_step_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.get_step_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.import_data_from">
+<span class="sig-name descname"><span class="pre">import_data_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">place</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.import_data_from"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.import_data_from" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.is_simulation_running">
+<span class="sig-name descname"><span class="pre">is_simulation_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.is_simulation_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.is_simulation_running" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.is_valid_route">
+<span class="sig-name descname"><span class="pre">is_valid_route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.is_valid_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.is_valid_route" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.load_information">
+<span class="sig-name descname"><span class="pre">load_information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.load_information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.load_information" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.manage_exception">
+<span class="sig-name descname"><span class="pre">manage_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Exception</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.manage_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.manage_exception" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.simulation_step">
+<span class="sig-name descname"><span class="pre">simulation_step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.simulation_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.simulation_step" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.connection.Sumo_connection.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gui</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/connection.html#Sumo_connection.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.connection.Sumo_connection.start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab.error_codes">
+<span id="aitrafficlab-error-codes-module"></span><h2>AITrafficLab.error_codes module<a class="headerlink" href="#module-AITrafficLab.error_codes" title="Link to this heading"></a></h2>
+</section>
+<section id="module-AITrafficLab.generators">
+<span id="aitrafficlab-generators-module"></span><h2>AITrafficLab.generators module<a class="headerlink" href="#module-AITrafficLab.generators" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Dumb_vehicle_generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.generators.</span></span><span class="sig-name descname"><span class="pre">Dumb_vehicle_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables={}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle_class=&lt;class</span> <span class="pre">'AITrafficLab.agents.Vehicle_agent'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Dumb_vehicle_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Dumb_vehicle_generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator" title="AITrafficLab.generators.Vehicle_generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle_generator</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Dumb_vehicle_generator.generate_vehicle">
+<span class="sig-name descname"><span class="pre">generate_vehicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Dumb_vehicle_generator.generate_vehicle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Dumb_vehicle_generator.generate_vehicle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Dumb_vehicle_generator.generate_vehicles">
+<span class="sig-name descname"><span class="pre">generate_vehicles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Dumb_vehicle_generator.generate_vehicles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Dumb_vehicle_generator.generate_vehicles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Dumb_vehicle_generator.get_vehicle_number">
+<span class="sig-name descname"><span class="pre">get_vehicle_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Dumb_vehicle_generator.get_vehicle_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Dumb_vehicle_generator.get_vehicle_number" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Dumb_vehicle_generator.initial_generation">
+<span class="sig-name descname"><span class="pre">initial_generation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Dumb_vehicle_generator.initial_generation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Dumb_vehicle_generator.initial_generation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Edge_generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.generators.</span></span><span class="sig-name descname"><span class="pre">Edge_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_observables={}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_class=&lt;class</span> <span class="pre">'AITrafficLab.agents.Road_agent'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Edge_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Edge_generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Edge_generator.create_edges">
+<span class="sig-name descname"><span class="pre">create_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Edge_generator.create_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Edge_generator.create_edges" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Edge_generator.get_classes">
+<span class="sig-name descname"><span class="pre">get_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Edge_generator.get_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Edge_generator.get_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Node_generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.generators.</span></span><span class="sig-name descname"><span class="pre">Node_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_class=&lt;class</span> <span class="pre">'AITrafficLab.agents.Junction_agent'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Node_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Node_generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Node_generator.create_nodes">
+<span class="sig-name descname"><span class="pre">create_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Node_generator.create_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Node_generator.create_nodes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Node_generator.get_classes">
+<span class="sig-name descname"><span class="pre">get_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Node_generator.get_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Node_generator.get_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Random_vehicle_generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.generators.</span></span><span class="sig-name descname"><span class="pre">Random_vehicle_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_init_car</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter_car</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables={}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle_class=&lt;class</span> <span class="pre">'AITrafficLab.agents.Vehicle_agent'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Random_vehicle_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Random_vehicle_generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator" title="AITrafficLab.generators.Vehicle_generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle_generator</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Random_vehicle_generator.generate_vehicle">
+<span class="sig-name descname"><span class="pre">generate_vehicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Random_vehicle_generator.generate_vehicle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Random_vehicle_generator.generate_vehicle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Random_vehicle_generator.generate_vehicles">
+<span class="sig-name descname"><span class="pre">generate_vehicles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Random_vehicle_generator.generate_vehicles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Random_vehicle_generator.generate_vehicles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Random_vehicle_generator.get_vehicle_number">
+<span class="sig-name descname"><span class="pre">get_vehicle_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Random_vehicle_generator.get_vehicle_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Random_vehicle_generator.get_vehicle_number" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Random_vehicle_generator.initial_generation">
+<span class="sig-name descname"><span class="pre">initial_generation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Random_vehicle_generator.initial_generation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Random_vehicle_generator.initial_generation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Vehicle_generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.generators.</span></span><span class="sig-name descname"><span class="pre">Vehicle_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observables={}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle_class=&lt;class</span> <span class="pre">'AITrafficLab.agents.Vehicle_agent'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Vehicle_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Vehicle_generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Vehicle_generator.generate_vehicle">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_vehicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Vehicle_generator.generate_vehicle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Vehicle_generator.generate_vehicle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Vehicle_generator.generate_vehicles">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_vehicles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Vehicle_generator.generate_vehicles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Vehicle_generator.generate_vehicles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Vehicle_generator.get_classes">
+<span class="sig-name descname"><span class="pre">get_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Vehicle_generator.get_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Vehicle_generator.get_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.generators.Vehicle_generator.initial_generation">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_generation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/generators.html#Vehicle_generator.initial_generation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.generators.Vehicle_generator.initial_generation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab.ootraci">
+<span id="aitrafficlab-ootraci-module"></span><h2>AITrafficLab.ootraci module<a class="headerlink" href="#module-AITrafficLab.ootraci" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Junction_info">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.ootraci.</span></span><span class="sig-name descname"><span class="pre">Junction_info</span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Junction_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Junction_info" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Junction_info.get_pos">
+<span class="sig-name descname"><span class="pre">get_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">junction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Junction_info.get_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Junction_info.get_pos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.ootraci.</span></span><span class="sig-name descname"><span class="pre">Road_info</span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_co2_emission">
+<span class="sig-name descname"><span class="pre">get_co2_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_co2_emission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_co2_emission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_co_electricity_consumption">
+<span class="sig-name descname"><span class="pre">get_co_electricity_consumption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_co_electricity_consumption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_co_electricity_consumption" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_co_emission">
+<span class="sig-name descname"><span class="pre">get_co_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_co_emission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_co_emission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_fuel_consumption">
+<span class="sig-name descname"><span class="pre">get_fuel_consumption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_fuel_consumption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_fuel_consumption" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_hce_emission">
+<span class="sig-name descname"><span class="pre">get_hce_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_hce_emission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_hce_emission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_lane_number">
+<span class="sig-name descname"><span class="pre">get_lane_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_lane_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_lane_number" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_length">
+<span class="sig-name descname"><span class="pre">get_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_max_speed">
+<span class="sig-name descname"><span class="pre">get_max_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_max_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_max_speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_noise_emission">
+<span class="sig-name descname"><span class="pre">get_noise_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_noise_emission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_noise_emission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Road_info.get_nox_emission">
+<span class="sig-name descname"><span class="pre">get_nox_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Road_info.get_nox_emission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Road_info.get_nox_emission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.ootraci.</span></span><span class="sig-name descname"><span class="pre">Vehicle_info</span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_acceleration">
+<span class="sig-name descname"><span class="pre">get_acceleration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_acceleration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_acceleration" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_accumulated_distance">
+<span class="sig-name descname"><span class="pre">get_accumulated_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_accumulated_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_accumulated_distance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_co2_emission">
+<span class="sig-name descname"><span class="pre">get_co2_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deltaT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_co2_emission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_co2_emission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_co_emission">
+<span class="sig-name descname"><span class="pre">get_co_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deltaT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_co_emission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_co_emission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_follower">
+<span class="sig-name descname"><span class="pre">get_follower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_follower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_follower" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_fuel_consumption">
+<span class="sig-name descname"><span class="pre">get_fuel_consumption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deltaT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_fuel_consumption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_fuel_consumption" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_leader">
+<span class="sig-name descname"><span class="pre">get_leader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_leader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_leader" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_position">
+<span class="sig-name descname"><span class="pre">get_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_position" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_road">
+<span class="sig-name descname"><span class="pre">get_road</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_road"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_road" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.get_speed">
+<span class="sig-name descname"><span class="pre">get_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.get_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.get_speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.is_stopped">
+<span class="sig-name descname"><span class="pre">is_stopped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.is_stopped"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.is_stopped" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.ootraci.Vehicle_info.set_route">
+<span class="sig-name descname"><span class="pre">set_route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">road_list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/AITrafficLab/ootraci.html#Vehicle_info.set_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.ootraci.Vehicle_info.set_route" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab.schedule">
+<span id="aitrafficlab-schedule-module"></span><h2>AITrafficLab.schedule module<a class="headerlink" href="#module-AITrafficLab.schedule" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.schedule.GraphOrderedScheduler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.schedule.</span></span><span class="sig-name descname"><span class="pre">GraphOrderedScheduler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_classes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/schedule.html#GraphOrderedScheduler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.schedule.GraphOrderedScheduler" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseScheduler</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.schedule.GraphOrderedScheduler.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/schedule.html#GraphOrderedScheduler.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.schedule.GraphOrderedScheduler.add" title="Link to this definition"></a></dt>
+<dd><p>Add an Agent object to the schedule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agent</strong> – An Agent to be added to the schedule. NOTE: The agent must</p></li>
+<li><p><strong>method.</strong> (<em>have a step</em><em>(</em><em>)</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.schedule.GraphOrderedScheduler.get_agent_count">
+<span class="sig-name descname"><span class="pre">get_agent_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/schedule.html#GraphOrderedScheduler.get_agent_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.schedule.GraphOrderedScheduler.get_agent_count" title="Link to this definition"></a></dt>
+<dd><p>Returns the current number of agents in the queue.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.schedule.GraphOrderedScheduler.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/schedule.html#GraphOrderedScheduler.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.schedule.GraphOrderedScheduler.remove" title="Link to this definition"></a></dt>
+<dd><p>Remove all instances of a given agent from the schedule.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is only necessary to explicitly remove agents from the schedule if
+the agent is not removed from the model.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> – An agent object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.schedule.GraphOrderedScheduler.sort_agents">
+<span class="sig-name descname"><span class="pre">sort_agents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/schedule.html#GraphOrderedScheduler.sort_agents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.schedule.GraphOrderedScheduler.sort_agents" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.schedule.GraphOrderedScheduler.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/schedule.html#GraphOrderedScheduler.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.schedule.GraphOrderedScheduler.step" title="Link to this definition"></a></dt>
+<dd><p>Execute the step of all the agents, one at a time.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab.traffic_model">
+<span id="aitrafficlab-traffic-model-module"></span><h2>AITrafficLab.traffic_model module<a class="headerlink" href="#module-AITrafficLab.traffic_model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AITrafficLab.traffic_model.</span></span><span class="sig-name descname"><span class="pre">Traffic_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Multiagent model for traffic simulations in urban networks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>connection</strong> (<a class="reference internal" href="#AITrafficLab.connection.Simulator_connection" title="AITrafficLab.connection.Simulator_connection"><em>AITrafficLab.connection.Simulator_connection</em></a>) – Traffic simulator abstraction.</p></li>
+<li><p><strong>graph</strong> (<em>Networkx.DiGraph</em>) – Graph associated to the urban network. Contains basic info such as travelling time, road length or road max speed.</p></li>
+<li><p><strong>line_graph</strong> (<em>Networkx.DiGraph</em>) – Line graph obtained from graph. It models the actual space where agents interact.</p></li>
+<li><p><strong>junctions</strong> (<em>dict</em><em>[</em><em>id</em><em>, </em><a class="reference internal" href="#AITrafficLab.agents.Junction_agent" title="AITrafficLab.agents.Junction_agent"><em>AITrafficLab.agents.Junction_agent</em></a><em>]</em>) – Collection of all junction agents present in the model.</p></li>
+<li><p><strong>roads</strong> (<em>dict</em><em>[</em><em>id</em><em>, </em><a class="reference internal" href="#AITrafficLab.agents.Road_agent" title="AITrafficLab.agents.Road_agent"><em>AITrafficLab.agents.Road_agent</em></a><em>]</em>) – Collection of all road agents present in the model.</p></li>
+<li><p><strong>schedule</strong> (<em>AITrafficLab.schedule.GraphOrderedActivation</em>) – Activation order for the different agents. Also stores all the agent instances.</p></li>
+<li><p><strong>to_destroy</strong> (<em>list</em><em>[</em><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent" title="AITrafficLab.agents.Vehicle_agent"><em>AITrafficLab.agents.Vehicle_agent</em></a><em>]</em>) – Collection of all agents to be removed from the simulation in the next iteration.</p></li>
+<li><p><strong>road_statistics</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>[</em><a class="reference internal" href="#AITrafficLab.agents.Road_agent" title="AITrafficLab.agents.Road_agent"><em>AITrafficLab.agents.Road_agent</em></a><em>,</em><em>list</em><em>[</em><em>Object</em><em>]</em><em>]</em><em>]</em>) – Information logged by the road agents. If set to, every road agent logs a value each iteration.
+Information is stored first by the metric name (e.g. “time”, “co2”), and then by the agents itself.
+Each agent can store any kind of object each iteration on its own list.
+After the end of the simulation, this attribute can be casted into a Pandas DataFrame.</p></li>
+<li><p><strong>vehicle_statistics</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>[</em><a class="reference internal" href="#AITrafficLab.agents.Vehicle_agent" title="AITrafficLab.agents.Vehicle_agent"><em>AITrafficLab.agents.Vehicle_agent</em></a><em>,</em><em>list</em><em>[</em><em>Object</em><em>]</em><em>]</em><em>]</em>) – Information logged by the vehicle agents. If set to, every vehicle agent logs a value each iteration.
+Information is stored first by the metric name (e.g. “time”, “co2”), and then by the agents itself.
+Each agent can store any kind of object each iteration on its own list.
+After the end of the simulation, this attribute can be casted into a Pandas DataFrame.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_generator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_generator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle_generator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gui</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model.__init__" title="Link to this definition"></a></dt>
+<dd><p>Creates a Traffic_model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph_file</strong> (<em>str</em>) – File where the simulation’s graph info is stored.</p></li>
+<li><p><strong>connection</strong> (<a class="reference internal" href="#AITrafficLab.connection.Simulator_connection" title="AITrafficLab.connection.Simulator_connection"><em>AITrafficLab.connection.Simulator_connection</em></a>) – Traffic simulator abstraction.</p></li>
+<li><p><strong>node_generator</strong> (<a class="reference internal" href="#AITrafficLab.generators.Node_generator" title="AITrafficLab.generators.Node_generator"><em>AITrafficLab.generators.Node_generator</em></a>) – Factory object in charge of creating node instances out of network junctions.
+If no node_generator is provided a basic AITrafficLab.generators.Node_generator is created.</p></li>
+<li><p><strong>edge_generator</strong> (<a class="reference internal" href="#AITrafficLab.generators.Edge_generator" title="AITrafficLab.generators.Edge_generator"><em>AITrafficLab.generators.Edge_generator</em></a>) – Factory object in charge of creating edge instances out of network roads.
+If no edge_generator is provided a basic AITrafficLab.generators.Edge_generator is created.</p></li>
+<li><p><strong>vehicle_generator</strong> (<a class="reference internal" href="#AITrafficLab.generators.Vehicle_generator" title="AITrafficLab.generators.Vehicle_generator"><em>AITrafficLab.generators.Vehicle_generator</em></a>) – Factory object in charge of creating vehicle instances.
+If no vehicle_generator is provided a basic AITrafficLab.generators.Dumb_vehicle_generator is created.</p></li>
+<li><p><strong>iters</strong> (<em>int</em>) – Number of iterations to run the simulation before closing the connection.
+If no value is provided the simulation will keep on running forever or until there are no more vehicles left.</p></li>
+<li><p><strong>gui</strong> (<em>boolean</em>) – Indicates wether to launch or not the simulators Graffic User Interface.</p></li>
+<li><p><strong>graph</strong> (<em>Networkx.DiGraph</em>) – Custom graph to be used. If no graph is provided, the network topology is infered from the network in graph_file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model._destroy">
+<span class="sig-name descname"><span class="pre">_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model._destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model._destroy" title="Link to this definition"></a></dt>
+<dd><p>Deletes the remaining agents.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model._initialize">
+<span class="sig-name descname"><span class="pre">_initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model._initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model._initialize" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Sets up the conditions needed for the simulation to run:</dt><dd><p>-Starts the simulator’s connection
+-Reads the information from the graph_file.
+-Creates all the node and edge agents
+-Closes the connection to avoid resource waste until simulation is started.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model._purge">
+<span class="sig-name descname"><span class="pre">_purge</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model._purge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model._purge" title="Link to this definition"></a></dt>
+<dd><p>Calls the on_destroy method for each agent stored in to_destroy and then removes it completely from the simulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model._start_eternal">
+<span class="sig-name descname"><span class="pre">_start_eternal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model._start_eternal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model._start_eternal" title="Link to this definition"></a></dt>
+<dd><p>Runs the simulation until it finishes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model._start_iters">
+<span class="sig-name descname"><span class="pre">_start_iters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model._start_iters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model._start_iters" title="Link to this definition"></a></dt>
+<dd><p>Runs the simulation for a set amount of iterations. Tracks the progress of the simulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model.add_agent">
+<span class="sig-name descname"><span class="pre">add_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model.add_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model.add_agent" title="Link to this definition"></a></dt>
+<dd><p>Adds an agent to the model. If the agent is a vehicle it’s added to the traffic simulator too.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agent</strong> (<em>Mesa.Agent</em>) – Agent to be added</p></li>
+<li><p><strong>place</strong> (<em>tuple</em><em>[</em><em>int</em><em>,</em><em>int</em><em>]</em>) – Road’s id where to place the agent if it’s a vehicle.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model.reset" title="Link to this definition"></a></dt>
+<dd><p>Clears the information logged by the agents. May be used to run several simulation by restarting the model every time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model.start" title="Link to this definition"></a></dt>
+<dd><p>Starts the traffic simulation. Adds at least one vehicle agent, then creates an initial vehicle batch.
+The simulation will either run forever or for a set number of iterations depending on the value of the attribute iters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AITrafficLab.traffic_model.Traffic_model.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AITrafficLab/traffic_model.html#Traffic_model.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AITrafficLab.traffic_model.Traffic_model.step" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Executes one iteration by running the logic of the model:</dt><dd><ul class="simple">
+<li><p>Creates new agents each iteration</p></li>
+<li><p>Awakes the agents acording to the schedule’s logic</p></li>
+<li><p>Runs one step simulation on the traffic simulator</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AITrafficLab">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-AITrafficLab" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Álvaro Martínez Parpolowicz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
