@@ -31,10 +31,10 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',]
 
-autodoc_default_options = {
-    'members': True,
-    'inherited-members': True,
-}
+# autodoc_default_options = {
+#     'members': True,
+#     'inherited-members': True,
+# }
 
 
 # Napoleon settings

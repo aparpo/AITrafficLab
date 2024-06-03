@@ -214,7 +214,7 @@ class Sonic_junction_generator(generators.Node_generator):
 class Sonic_edge_generator(generators.Edge_generator): 
 
     def __init__(self, connection, k, speed_coef=0, lane_coef=0, len_coef=0, src_central_coef=0, dst_central_coef=0, edge_observables = {}, edge_class = agents.Road_agent, max_speed = 33.33, max_lanes = 4, max_length = 3000, epsilon = 0.2):
-        super().__init__(connection, edge_observables, edge_class)
+        super().__init__(connection, edge_class, edge_observables)
         self.speed_coef = speed_coef
         self.lane_coef = lane_coef
         self.len_coef = len_coef

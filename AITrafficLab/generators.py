@@ -222,7 +222,7 @@ class Random_vehicle_generator(Vehicle_generator):
     Each vehicle is also created with random origin and destination within the edges of the network.
     """
     def __init__(self, connection, prob, max_init_car, max_iter_car, observables={}, vehicle_class=Vehicle_agent, **kwargs):
-        super().__init__(connection, observables, vehicle_class, **kwargs)
+        super().__init__(connection,  vehicle_class, observables, **kwargs)
         self.prob = prob
         self.max_init_car = max_init_car
         self.max_iter_car = max_iter_car

@@ -1,4 +1,4 @@
-import agents
+from AITrafficLab import agents
 from scipy.spatial.distance import euclidean
 import networkx as nx
 import traci

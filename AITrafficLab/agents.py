@@ -253,7 +253,7 @@ class Road_agent(mesa.Agent):
         return self.get_agent_by_pos(-1, default_destination=False) 
         
     def step(self):
-        """"
+        """
         Executes the logic of the road agent and logs the metrics defined in the attribute observables.
         """ 
         self.step_behaviour()
@@ -378,7 +378,7 @@ class Vehicle_agent(mesa.Agent):
             return road_id 
               
     def step(self):
-        """"
+        """
         Executes the logic of the vehicle agent and logs the metrics defined in the attribute observables.
         If the reached the end of its route it is sent to the model's to_destroy queue.
         """ 

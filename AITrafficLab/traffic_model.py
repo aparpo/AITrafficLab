@@ -83,7 +83,7 @@ class Traffic_model(mesa.Model):
             edge_generator = Edge_generator(self.connection)
         self.edge_generator = edge_generator
         if not vehicle_generator:
-            vehicle_generator = Dumb_vehicle_generator(self.connection)
+            vehicle_generator = Random_vehicle_generator(self.connection)
         self.vehicle_generator = vehicle_generator
 
         self.junctions = dict()

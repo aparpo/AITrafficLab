@@ -1,0 +1,6 @@
+exclude AITrafficLab.egg-info/*
+exclude .git/*
+exclude test/*
+exclude cache/*
+exclude docs/*
+exclude notebooks/*

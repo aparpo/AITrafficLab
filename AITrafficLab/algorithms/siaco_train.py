@@ -1,10 +1,10 @@
 import optuna
-import generators
-import siaco
-import agents
+from AITrafficLab import generators
+from AITrafficLab.algorithms import siaco
+from AITrafficLab import agents
 import AITrafficLab.traffic_model as traffic_model
 import mlflow
-from batch import Batch_proccessing
+from AITrafficLab.batch import Batch_proccessing
 from statistics import mean
 import warnings
 import networkx as nx
@@ -87,30 +87,31 @@ def objective(trial, simm_conn, filepath, graph, observables, iters, sims):
         mlflow.log_metric("mean", media)
     return media
 
-from connection import Sumo_connection
-mlflow.set_tracking_uri(uri="http://localhost:8080/")
-mlflow.set_experiment("SIACO4_cuadricula")
+if __name__ == "__main__":
+    from connection import Sumo_connection
+    mlflow.set_tracking_uri(uri="http://localhost:8080/")
+    mlflow.set_experiment("SIACO4_cuadricula")
 
-# Crear un grafo de cuadrícula de tamaño 5x5
-rows, cols = 5, 5
-G = nx.grid_2d_graph(rows, cols)
+    # Crear un grafo de cuadrícula de tamaño 5x5
+    rows, cols = 5, 5
+    G = nx.grid_2d_graph(rows, cols)
 
-# Renombrar los nodos para que no sean tuplas
-mapping = { (i, j): i * cols + j for i, j in G.nodes() }
-G = nx.relabel_nodes(G, mapping)
-G.add_nodes_from([-1,-2,-3,-4])
-G.add_edges_from([(-1,0),(24,-2), (-3,10),(10,-3),(14,-4),(-4,14)])
-G = nx.DiGraph(G)
+    # Renombrar los nodos para que no sean tuplas
+    mapping = { (i, j): i * cols + j for i, j in G.nodes() }
+    G = nx.relabel_nodes(G, mapping)
+    G.add_nodes_from([-1,-2,-3,-4])
+    G.add_edges_from([(-1,0),(24,-2), (-3,10),(10,-3),(14,-4),(-4,14)])
+    G = nx.DiGraph(G)
 
-place= "/Cuadricula"
-path = "./test"
-simm_conn = Sumo_connection()
-filepath = path+place
-observables = {}
-trial = []
-study = optuna.create_study(direction="minimize", study_name="SIACO")
-# study = optuna.load_study(study_name="MLP Tensorflow")
-func = lambda trial: objective(trial=trial, graph = G, simm_conn=simm_conn, filepath=filepath, observables=observables, iters=1000, sims=5)
+    place= "/Cuadricula"
+    path = "./test"
+    simm_conn = Sumo_connection()
+    filepath = path+place
+    observables = {}
+    trial = []
+    study = optuna.create_study(direction="minimize", study_name="SIACO")
+    # study = optuna.load_study(study_name="MLP Tensorflow")
+    func = lambda trial: objective(trial=trial, graph = G, simm_conn=simm_conn, filepath=filepath, observables=observables, iters=1000, sims=5)
 
-study.optimize(func, n_trials=1000, callbacks=[callback])
+    study.optimize(func, n_trials=1000, callbacks=[callback])
 

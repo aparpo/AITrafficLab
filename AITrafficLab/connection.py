@@ -7,7 +7,7 @@ import subprocess
 import osmnx as ox
 import os
 
-import ootraci
+from AITrafficLab import ootraci
 
 class Simulator_connection(ABC):
     """
